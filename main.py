@@ -52,6 +52,7 @@ def tts(text):
     stream.close()
     pTTS.terminate()
     print("Playing audio done")
+    u_gui.stop_thread(thread1)
     flag = 0
 
 
@@ -118,7 +119,6 @@ is_recording = 0
 print("Starting Program")
 while True:
     if (flag == 0):
-        print("idle")
         button.config(image="assets/mic.jpg",state="normal")
         refresh.config(image="assets/refresh.jpg",state="normal")
         back.config(image="",state="disable")
@@ -134,11 +134,11 @@ while True:
 
             if flag == 2:
                 print("recording")
-                trans .config(text=text)
+                trans.config(text=text)
                 stream.stop_stream()
 
                 DigitalTime.config(text=time.strftime(""))
-                trans .config(text="Thinking。。。")
+                trans.config(text="Thinking。。。")
                 user["content"] = text
                 message.append(user.copy())
                 openai_resp = askOpenAI(message)
@@ -177,7 +177,7 @@ while True:
         DigitalTime.config(text=time.strftime(""))
         is_recording = 1
         init.config(x=600)
-        trans .config(text="Listening。。。")
+        trans.config(text="Listening。。。")
         stream.start_stream()
         button.config(image="",state="disable")
         refresh.config(image="",state="disable")
